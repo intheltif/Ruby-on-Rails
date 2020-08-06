@@ -21,7 +21,7 @@ def get_area_code(somehash, key)
   if somehash.include? key
     return "The area code for #{key} is #{somehash[key]}"
   else
-   return "That city does not exist."
+    return "That city does not exist."
   end
 end
  
