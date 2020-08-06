@@ -1,3 +1,6 @@
+
+require_relative 'crud'
+
 users = [
   {username: "mashrur", password: "password1"},
   {username: "jack", password: "password2"},
@@ -5,14 +8,8 @@ users = [
   {username: "jonsnow", password: "password4"},
   {username: "heisenberg", password: "password5"},
 ]
-def auth_user(username, password, list_of_users)
-  list_of_users.each do |user_record|
-    if user_record[:username] == username && user_record[:password] == password
-      return user_record
-    end
-  end
-  "Credentials were not correct."
-end
+
+hashed_users = Crud::create_secure_users(users)
 
 welcome_msg = "Welcome to the authenticator"
 puts welcome_msg
@@ -28,7 +25,7 @@ while attempts < 4
   print "Password: "
   password = gets.chomp
   
-  auth = auth_user(username, password, users)
+  auth = Crud::authenticate_user(username, password, hashed_users)
   puts auth
  
   puts "Press n to quit or any other key to continue: "
